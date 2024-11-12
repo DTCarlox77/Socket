@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Moderno</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --chat-bg: #ffffff;
+            --input-bg: #f0f2f5;
+            --text-color: #333333;
+            --accent-color: #667eea;
+            --timestamp-color: #888888;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 400px;
+            height: 600px;
+            background-color: var(--chat-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .chat-header {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .message {
+            display: flex;
+            margin-bottom: 20px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        .message-content {
+            flex: 1;
+            background-color: var(--input-bg);
+            padding: 12px;
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .username {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .timestamp {
+            font-size: 0.8em;
+            color: var(--timestamp-color);
+        }
+        
+        .text {
+            line-height: 1.4;
+            color: var(--text-color);
+        }
+        
+        .chat-input {
+            background-color: var(--input-bg);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            border: none;
+            background-color: white;
+            color: var(--text-color);
+            padding: 12px;
+            border-radius: 25px;
+            margin-right: 10px;
+            font-size: 14px;
+            box-shadow: var(--shadow);
+        }
+        
+        .chat-input input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--accent-color);
+        }
+        
+        .chat-input button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        
+        .chat-input button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        @media (max-width: 480px) {
+            .chat-container {
+                height: 100%;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            Django Channels
+        </header>
+        <main class="chat-messages" id="mensajes">
+
+        </main>
+        <footer class="chat-input">
+            <input id="texto" type="text" placeholder="Escribe un mensaje..." aria-label="Escribe un mensaje">
+            <button id="boton" type="button">Enviar</button>
+            <button id="alerta" type="button">Alerta</button>
+        </footer>
+    </div>
+
+    <script src="{% static 'javascript/websockets.js' %}"></script>
+</body>
+</html>
